@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理ダッシュボード - モンゴル青年ナーダム</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>管理ダッシュボード / Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="/admin/registrations">参加者一覧</a></li>
+                <li><a href="/admin/export">CSVエクスポート</a></li>
+                <li><a href="/admin/logout">ログアウト</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <h2>参加者一覧 (<%= participants.length %>名)</h2>
+        <% if (participants.length === 0) { %>
+            <p>まだ登録者はいません。</p>
+        <% } else { %>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>氏名</th>
+                        <th>メール</th>
+                        <th>性別</th>
+                        <th>電話</th>
+                        <th>出身地</th>
+                        <th>メール送信</th>
+                        <th>支払い</th>
+                        <th>登録日</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% participants.forEach(function(p) { %>
+                        <tr>
+                            <td><%= p.name %></td>
+                            <td><%= p.email %></td>
+                            <td><%= p.gender %></td>
+                            <td><%= p.phone %></td>
+                            <td><%= p.hometown %></td>
+                            <td><%= p.email_sent_status ? '送信済' : '未送信' %></td>
+                            <td><%= p.payment_status ? '支払済' : '未払い' %></td>
+                            <td><%= p.created_at ? new Date(p.created_at).toLocaleDateString('ja-JP') : '-' %></td>
+                            <td>
+                                <form action="/admin/toggle-payment/<%= p._id %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-small">
+                                        <%= p.payment_status ? '未払いに戻す' : '支払済にする' %>
+                                    </button>
+                                </form>
+                                <form action="/admin/delete/<%= p._id %>" method="POST" style="display:inline;" onsubmit="return confirm('削除しますか？');">
+                                    <button type="submit" class="btn-small btn-danger">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <% } %>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mongolian Youth Nadam. All rights reserved.</p>
+    </footer>
+</body>
+</html>
