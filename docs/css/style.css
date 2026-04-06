@@ -60,15 +60,19 @@ img { display: block; max-width: 100%; }
 .hero-logo img {
   height: 44px;
   width: auto;
-  filter: brightness(0) invert(1);
   opacity: 0.9;
 }
 
-.hero-logo span {
+.hero-logo span,
+.hero-logo a:not(:has(img)) {
   font-size: 0.78rem;
   letter-spacing: 0.28em;
   color: rgba(255,255,255,0.7);
   white-space: nowrap;
+  text-decoration: none;
+}
+.hero-logo a:not(:has(img)):hover {
+  color: rgba(255,255,255,1);
 }
 
 .hero-divider {
