@@ -85,7 +85,7 @@ img { display: block; max-width: 100%; }
 
 .hero-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(1.9rem, 5vw, 3.4rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
   font-weight: 600;
   letter-spacing: 0.1em;
   line-height: 1.2;
@@ -480,7 +480,7 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 1.7rem; }
+  .hero-title { font-size: 1.3rem; }
   .btn-hero { padding: 12px 32px; font-size: 0.88rem; }
   .gallery-item { width: 180px; height: 135px; }
 }
